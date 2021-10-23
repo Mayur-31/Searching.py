@@ -1,0 +1,91 @@
+# Linear and Sentinal Search
+def linear_search(RollNo,key):
+    for i in range(len(RollNo)):
+        if RollNo[i]==key:
+            return i
+    return "Not Found"
+
+def sentinal_search(RollNo,key):
+    if key==(len(RollNo)-1):
+        return(len(RollNo)-1)
+
+    for i in range(len(RollNo)-2):
+        if RollNo[i]==key:
+            return i
+    return "Not Found"
+
+RollNo=input("Enter the Roll numbers of the students:\n")
+RollNo=RollNo.split()
+RollNo=[int(x) for x in RollNo]
+key=int(input("Enter the number to search for:\n"))
+index = sentinal_search(RollNo,key)
+index1= linear_search(RollNo,key)
+print("Index for Sentinal:",key,"is at",index,"position")
+print("index for linear:",key,"is at",index1,"position")   
+
+
+# Binary Search
+def binary_search(RollNo,key):
+    start=0
+    end=len(RollNo)
+    while start<end:
+        mid=(start + end)//2
+        if RollNo[mid]>key:
+            end = mid
+        elif RollNo[mid]<key:
+            start=mid + 1
+        else:
+            return mid
+    return -1
+
+RollNo = input("Enter RollNo of the students:\n")
+RollNo = RollNo.split()
+RollNo =[int(x) for x in RollNo]
+key = int(input("Enter the number to search for:\n"))
+
+index = binary_search(RollNo,key)
+if index<0:
+    print("index was not found",index)
+else:
+    print("index for Binary:",key,"was found at index",index)    
+
+# Fibonacci Search
+def fib_search(RollNo,key):
+    length= len(RollNo)
+    first =-1
+    x1 = 0
+    x2 = 1
+    x3 = 1
+    while(x3<length):
+        x1 = x2
+        x2 = x3
+        x3 = x2 + x1
+    while(x3>1):
+        eleIndex = min(first + x1,length -1)
+        if RollNo[eleIndex]< key:
+            x3,x2 = x2,x1
+            x1 = x3- x2
+            start = eleIndex
+        elif RollNo[eleIndex]> key:
+            x3 = x1
+            x2 = x2-x1
+            x1 = x3-x2
+        else:
+            return eleIndex
+    if(x2) and (RollNo[length-1] == RollNo):
+        return length -1
+    return None
+RollNo = input("Enter the RollNo of students:\n")
+RollNo = RollNo.split()
+RollNo =[int(x) for x in RollNo]
+key = int(input("Enter the number to search for:\n"))
+
+index = fib_search(RollNo,key)
+if index <0:
+    print("index was not found",index)
+else:
+    print("index for Fibonacci:",key,"was found at index",index)  
+
+
+
+
